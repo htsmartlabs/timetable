@@ -15,7 +15,9 @@ router.get('/',(req,res,next) =>{
 
 router.post('/',(req,res,next) =>{
     const timeing = new Timeing({
-        name:req.body.name
+        daylight_id:req.body.daylight_id,
+        room_id:req.body.room_id,
+        clock_id:req.body.clock_id
     })    
     timeing.save()
     .then(data => {
@@ -29,7 +31,9 @@ router.put('/:id',(req,res,next) =>{
         return res.json({status:false,message:'Invalid object Id please try again'});
     }else{
         const timeing = {
-            name:req.body.name
+            daylight_id:req.body.daylight_id,
+            room_id:req.body.room_id,
+            clock_id:req.body.clock_id
         };
         Timeing.findByIdAndUpdate(req.params.id,{$set:timeing},{new:true})
         .exec()
