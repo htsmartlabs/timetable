@@ -1,30 +1,51 @@
 <div class="container">
   <h1 class="text-center">Create Timeing Slots</h1>
-  <div class="form-row">
-    <div class="form-group col-sm-3">
-      <label for="daylight">Day</label>
-      <select id="daylight" class="form-control" name="daylight">
-        <option select disabled>Choose...</option>
-        <option>Day</option>
-      </select>
+  <form (ngSubmit)="selectTimeSlot(sForm)" #sForm = "ngForm">
+    <div class="form-row">
+      <div class="form-group col-sm-3">
+        <label for="daylight">Day</label>
+        <select id="daylight" class="form-control" name="daylight" ngModel>
+          <option select disabled>Choose...</option>
+          <option *ngFor="let day of daylights; let i = index;" [value]="i">{{day.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="room">Room</label>
+        <select id="room" class="form-control" name="room" ngModel>
+          <option select disabled>Choose...</option>
+          <option *ngFor="let room of rooms;let i = index;" [value]="i" >{{room.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="clock">Time</label>
+        <select id="clock" class="form-control" name="clock" ngModel>
+          <option select disabled>Choose...</option>
+          <option *ngFor="let clock of clocks;let i = index;" [value]="i">{{clock.name}}</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-3">
+        <label for="Select">Add the timeing</label>
+        <input class="btn btn-primary form-control" id="select" name="select" type="submit" value="Submit">
+      </div>
     </div>
-    <div class="form-group col-sm-3">
-      <label for="room">Room</label>
-      <select id="room" class="form-control" name="room">
-        <option select disabled>Choose...</option>
-        <option>Room</option>
-      </select>
-    </div>
-    <div class="form-group col-sm-3">
-      <label for="clock">Time</label>
-      <select id="clock" class="form-control" name="clock">
-        <option select disabled>Choose...</option>
-        <option>Day</option>
-      </select>
-    </div>
-    <div class="form-group col-sm-3">
-      <label for="Select">Add the timeing</label>
-      <button class="btn btn-primary form-control" id="select" name="select">Select</button>
-    </div>
+  </form>
+  <h2 class="text-center">Selected Timeing Slots</h2>
+  <div class="container">
+    <table class="table table-condensed table-hover table-border table-striped">
+      <thead>
+        <th>Sl No</th>
+        <th>Selected Day</th>
+        <th>Selected Room</th>
+        <th>Selected Time</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let timeing of timeings;let i = index;">
+          <td>{{i}}</td>
+          <td>{{timeing.daylight_name}}</td>
+          <td>{{timeing.room_name}}</td>
+          <td>{{timeing.clock_name}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
